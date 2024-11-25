@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña</title>
+    <link rel="stylesheet" href="Css/rec_contra.css">
+</head>
+<body>
+    <div class="background">
+        <img src="Imagenes/fondo.jpeg" alt="Background">
+    </div>
+
+    <nav id="menu">
+        <a href="Index.html"><img src="Imagenes/casa.jpeg" class="entrar-icon"></a>
+    </nav>
+
+    <div class="form-container">
+        <div class="success-message" id="successMessage">
+            ¡Correo de recuperación enviado con éxito!
+        </div>
+
+        <h2>Recuperar Contraseña</h2>
+
+        <form id="recoveryForm" onsubmit="return validateEmail(event)">
+            <div class="form-group">
+                <label for="email">Correo electrónico <span class="required">*</span></label>
+                <input type="email" id="email" name="email" required>
+                <div class="error" id="emailError">Por favor ingresa un correo electrónico válido</div>
+            </div>
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+
+    <script>
+        function validateEmail(event) {
+            event.preventDefault();
+
+            // Ocultar mensaje de error y éxito
+            document.getElementById('emailError').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!emailRegex.test(email)) {
+                document.getElementById('emailError').style.display = 'block';
+                return false;
+            }
+
+            // Simular el envío de correo
+            document.getElementById('successMessage').style.display = 'block';
+            document.getElementById('recoveryForm').reset();
+
+            // Ocultar el mensaje de éxito después de 3 segundos
+            setTimeout(() => {
+                document.getElementById('successMessage').style.display = 'none';
+            }, 3000);
+
+            return true;
+        }
+    </script>
+</body>
+</html>
